@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.task;
 import utils.DBUtil;
+
 /**
  * Servlet implementation class NewServlet
  */
@@ -30,21 +31,18 @@ public class NewServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
         em.getTransaction().begin();
 
         // taskのインスタンスを生成
         task t = new task();
 
-        // mの各フィールドにデータを代入
-        String title = "taro";
-        t.setTitle(title);
-
         String content = "hello";
         t.setContent(content);
 
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis()); // 現在の日時を取得
         t.setCreated_at(currentTime);
         t.setUpdated_at(currentTime);
 
@@ -56,6 +54,6 @@ public class NewServlet extends HttpServlet {
         response.getWriter().append(Integer.valueOf(t.getId()).toString());
 
         em.close();
-     }
+    }
 
 }
